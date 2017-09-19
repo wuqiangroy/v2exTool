@@ -32,5 +32,5 @@ class v2extool:
 
 if __name__ == "__main__":
     v = v2extool()
-    v.login(username="wuqiangroy", password="WuQiang123")
+    v.login(username="wuqiangroy", password="123321")
 
