@@ -55,31 +55,55 @@ class v2extool:
         return True
 
     def node_content(self, node_name="tech"):
+
+        if not isinstance(node_name, str):
+            raise ValueError("node name must be strings")
+
         content = []
-        res = self.session.get(main_url + "/?tab={}".format(node_name), proxies=self.proxy, timeout=10)
-        soup = BeautifulSoup(res.text, "html.parser")
-        items = soup.find_all(attrs={"class": "cell item"})
-        for item in items:
-            data = item.find("span")
-            content.append({
-                "node_name": node_name,
-                "article_id": re.search(r"\d+", str(data)).group(),
-                "article_name": re.search(r"reply\d+", str(data)).group()[5:],
-                "reply_num": data.text,
-                "author": item.find("strong").text
-            })
-        print(content)
-        return content
+        if node_name in ["tech", "creative", "play", "apple", "jobs", "deals", "city", "qna", "hot", "all", "r2",
+                         "nodes", "members"]:
+            res = self.session.get(main_url + "/?tab={}".format(node_name), proxies=self.proxy, timeout=10)
+            soup = BeautifulSoup(res.text, "html.parser")
+            items = soup.find_all(attrs={"class": "cell item"})
+            for item in items:
+                data = item.find("span")
+                content.append({
+                    "node_name": node_name,
+                    "article_id": re.search(r"\d+", str(data)).group(),
+                    "article_name": data.text,
+                    "reply_num": re.search(r"reply\d+", str(data)).group()[5:],
+                    "author": item.find("strong").text
+                })
+            print(content)
+            return content
+        else:
+            res = self.session.get(main_url + "/go/{}".format(node_name), proxies=self.proxy, timeout=10)
+            soup = BeautifulSoup(res.text, "html.parser")
+            items = soup.find_all(attrs={"class": re.compile(r'^cell from')})
+            for item in items:
+                data = item.find(attrs={"class": "item_title"})
+                content.append({
+                    "node_name": node_name,
+                    "article_id": re.search(r"\d+", str(data)).group(),
+                    "article_name": data.text,
+                    "reply_num": re.search(r"reply\d+", str(data)).group()[5:],
+                    "author": item.find("strong").text
+                })
+            print(content)
+            return content
 
     def article_info(self, article_id):
 
         try:
             int(article_id)
         except ValueError as e:
-            raise ValueError("article_id must a int or all numeric strings")
+            raise ValueError("article_id must be an int or all numeric strings")
         article_detail = {}
         reply_content = []
         res = self.session.get(main_url + "/t/{}".format(str(article_id)), proxies=self.proxy, timeout=10)
+        if "主题未找到" in res.text:
+            print("topic not found")
+            return False
         soup = BeautifulSoup(res.text, "html.parser")
         data = soup.find(attrs={"class": "gray"}).text.split("·")
         content = soup.find(attrs={"class": "markdown_body"}).text
@@ -114,6 +138,6 @@ if __name__ == "__main__":
     # v.login(username="wuqiangroy", password="123321")
     # v.check_in
     # v.user_info("wuqiangroy")
-    # v.node_content()
-    v.article_info(391903)
+    v.node_content("share")
+    # v.article_info(391903444)
 
