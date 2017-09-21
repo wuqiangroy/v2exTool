@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # _*_ coding:utf-8 _*_
 
-from .main_func import v2extool
+from .main_func import V2exTool
 
-v2extool = v2extool()
+v2extool = V2exTool()
 
 
 def login(username, password):
@@ -28,5 +28,3 @@ def node_content(node_name="tech"):
 
 def article_info(article_id):
     return v2extool.article_info(article_id)
-
-# balance = balance()

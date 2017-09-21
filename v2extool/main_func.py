@@ -21,7 +21,7 @@ def access_deny(proxy=""):
     return decorator
 
 
-class v2extool:
+class V2exTool:
     """main func"""
 
     session = requests.session()
@@ -176,7 +176,7 @@ class v2extool:
 
 
 if __name__ == "__main__":
-    v = v2extool()
+    v = V2exTool()
     v.login(username="wuqiangroy", password="123321")
     # v.check_in
     # v.user_info("wuqiangroy")

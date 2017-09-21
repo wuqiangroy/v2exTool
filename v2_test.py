@@ -5,4 +5,5 @@
 import v2extool
 
 v2extool.login("wuqiangroy", "123321")
-v2extool.balance()
+# v2extool.balance()
+# v2extool.check_in()
