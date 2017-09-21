@@ -3,8 +3,8 @@ import re
 import json
 import requests
 from bs4 import BeautifulSoup
-from v2extool.error import *
-from v2extool.config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
+from error import *
+from config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
 
 
 def access_deny(proxy=""):
@@ -42,8 +42,8 @@ class v2extool:
             param[3]["name"]: param[3]["value"],
             param[5]["name"]: param[5]["value"]
         }
-        res = self.session.post(url=login_url, params=data, headers=headers, proxies=self.proxy, timeout=10)
-        if "登录有点问题，请重试一次" in res.text:
+        res = self.session.post(url=login_url, params=data, headers=headers, proxies=self.proxy, timeout=10).text
+        if "登录有点问题，请重试一次" in res or "用户名和密码无法匹配" in res:
             print(login_failed)
             return False
         else:
@@ -182,5 +182,5 @@ if __name__ == "__main__":
     # v.user_info("wuqiangroy")
     # v.node_content("share")
     # v.article_info(391903444)
-    v.balance()
+    v.balance
 
