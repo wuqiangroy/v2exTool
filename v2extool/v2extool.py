@@ -1,9 +1,10 @@
+
 import re
 import json
 import requests
 from bs4 import BeautifulSoup
-from error import *
-from config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
+from v2extool.error import *
+from v2extool.config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
 
 
 def access_deny(proxy=""):
@@ -175,7 +176,7 @@ class v2extool:
 
 if __name__ == "__main__":
     v = v2extool()
-    v.login(username="wuqiangroy", password="WuQiang123")
+    v.login(username="wuqiangroy", password="123321")
     # v.check_in
     # v.user_info("wuqiangroy")
     # v.node_content("share")
