@@ -14,6 +14,7 @@ main_url = "https://www.v2ex.com"
 login_url = "https://www.v2ex.com/signin"
 check_in_url = "https://www.v2ex.com/mission/daily"
 user_info_url = "https://www.v2ex.com/api/members/show.json"
+balance_url = "https://www.v2ex.com/balance"
 
 node_name = {
 
