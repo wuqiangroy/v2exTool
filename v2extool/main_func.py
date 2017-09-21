@@ -3,8 +3,8 @@ import re
 import json
 import requests
 from bs4 import BeautifulSoup
-from error import *
-from config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
+from .error import *
+from .config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
 
 
 def access_deny(proxy=""):
