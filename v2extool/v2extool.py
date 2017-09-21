@@ -157,6 +157,7 @@ class v2extool:
         article_detail.update({"reply_content": reply_content})
         print(json.dumps(article_detail))
 
+    @property
     def balance(self):
         """show your balance"""
         res = self.session.get(balance_url, proxies=self.proxy, timeout=10)
