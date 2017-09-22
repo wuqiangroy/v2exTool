@@ -26,5 +26,5 @@ def node_content(node_name="tech"):
     return v2extool.node_content(node_name)
 
 
-def article_info(article_id):
-    return v2extool.article_info(article_id)
+# def article_info(article_id):
+#     return v2extool.article_info(article_id)
