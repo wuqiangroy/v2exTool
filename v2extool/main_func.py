@@ -22,7 +22,7 @@ class V2exTool:
     # proxy = {"https": "http://61.160.208.222:8080"}
     proxy = ""
 
-    def proxies(self, ip=None, port=None):
+    def use_proxy(self, ip=None, port=None):
         if ":" in ip:
             self.proxy = {"https": "http://{}".format(ip),
                           "http": "http://{}".format(ip)}
