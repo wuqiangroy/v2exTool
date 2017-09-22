@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 
 setup(
     name='v2extool',
@@ -10,4 +10,5 @@ setup(
     packages=['v2extool'],
     license='MIT',
     platforms='any',
+    classifiers=[],
     )
