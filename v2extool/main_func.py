@@ -7,10 +7,10 @@ from .error import *
 from .config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
 
 
-def access_denied(html):
+def access_deny(res):
     """ to detect if ip blocked by v2ex"""
 
-    if "Access Denied" in html:
+    if "Access Denied" in res.text or res.status_code == 403:
         print(access_denied)
         return True
 
@@ -32,10 +32,10 @@ class V2exTool:
 
     def login(self, username, password):
 
-        html = self.session.get(login_url, proxies=self.proxy, timeout=10).text
-        if access_denied(html):
+        res = self.session.get(login_url, proxies=self.proxy, timeout=10)
+        if access_deny(res):
             return False
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(res.text, "html.parser")
         param = soup.find_all("input")
         data = {
             param[1]["name"]: username,
@@ -55,7 +55,7 @@ class V2exTool:
     def check_in(self):
         res = self.session.get(check_in_url, proxies=self.proxy, timeout=10)
 
-        if access_denied(res.text):
+        if access_deny(res):
             return False
 
         if "你要查看的页面需要先登录" in res.text:
@@ -79,7 +79,7 @@ class V2exTool:
             raise TypeError("You must type one params: username or user_id")
         user_url = user_info_url + "?username={}&id={}".format(username, user_id)
         res = requests.get(user_url, proxies=self.proxy, timeout=10)
-        if access_denied(res.text):
+        if access_deny(res):
             return False
         print(res.json())
         return True
@@ -93,7 +93,7 @@ class V2exTool:
         if node_name in ["tech", "creative", "play", "apple", "jobs", "deals", "city", "qna", "hot", "all", "r2",
                          "nodes", "members"]:
             res = self.session.get(main_url + "/?tab={}".format(node_name), proxies=self.proxy, timeout=10)
-            if access_denied(res.text):
+            if access_deny(res):
                 return False
             soup = BeautifulSoup(res.text, "html.parser")
             items = soup.find_all(attrs={"class": "cell item"})
@@ -110,7 +110,7 @@ class V2exTool:
             return content
         else:
             res = self.session.get(main_url + "/go/{}".format(node_name), proxies=self.proxy, timeout=10)
-            if access_denied(res.text):
+            if access_deny(res):
                 return False
             soup = BeautifulSoup(res.text, "html.parser")
             items = soup.find_all(attrs={"class": re.compile(r'^cell from')})
@@ -136,7 +136,7 @@ class V2exTool:
         reply_content = []
         res = self.session.get(main_url + "/t/{}".format(str(article_id)), proxies=self.proxy, timeout=10)
 
-        if access_denied(res.text):
+        if access_deny(res):
             return False
         if "主题未找到" in res.text:
             print(topic_not_found)
@@ -174,7 +174,7 @@ class V2exTool:
     def balance(self):
         """show your balance"""
         res = self.session.get(balance_url, proxies=self.proxy, timeout=10)
-        if access_denied(res.text):
+        if access_deny(res):
             return False
         if "你要查看的页面需要先登录" in res.text:
             print(login_required)

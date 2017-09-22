@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='v2extool',
-    version='0.1',
+    version='0.1.1',
     description='a small tool for you to surf v2ex better',
     author='Qiang Wu',
     author_email='wuqiangroy@live.com',

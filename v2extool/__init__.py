@@ -26,5 +26,9 @@ def node_content(node_name="tech"):
     return v2extool.node_content(node_name)
 
 
+def use_proxy(ip=None, port=None):
+    return v2extool.use_proxy(ip, port)
+
+
 # def article_info(article_id):
 #     return v2extool.article_info(article_id)
