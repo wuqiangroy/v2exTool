@@ -9,8 +9,5 @@ setup(name='v2extool',
       packages=['v2extool'],
       license='MIT',
       platforms='any',
-      classifiers=['Development Status :: 0.1',
-                   'Intended Audience :: Developers',
-                   'License :: OSI Approved :: MIT License'
-                   ],
+      classifiers=[],
       )
