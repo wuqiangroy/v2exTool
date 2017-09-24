@@ -15,6 +15,10 @@ login_url = "https://www.v2ex.com/signin"
 check_in_url = "https://www.v2ex.com/mission/daily"
 user_info_url = "https://www.v2ex.com/api/members/show.json"
 balance_url = "https://www.v2ex.com/balance"
+top_active_url = "https://www.v2ex.com/top/dau"
+top_wealth_url = "https://www.v2ex.com/top/rich"
+top_cons_url = "https://www.v2ex.com/top/player"
+post_url = "https://www.v2ex.com/new"
 
 node_name = {
 
