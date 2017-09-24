@@ -4,7 +4,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from .error import *
-from .config import headers, main_url, login_url, check_in_url, user_info_url, balance_url
+from .config import *
 
 
 def access_deny(res):
@@ -195,4 +195,28 @@ class V2exTool:
         except ValueError as e:
             raise ValueError("article_id must be an int or all numeric strings")
 
+        pass
+
+    @property
+    def top_active(self):
+        res = requests.get(top_active_url, proxies=self.proxy, timeout=10)
+        if access_deny(res):
+            return False
+        pass
+    
+    @property
+    def top_wealth(self):
+        res = requests.get(top_wealth_url, proxies=self.proxy, timeout=10)
+        if access_deny(res):
+            return False
+        pass
+    
+    @property
+    def top_cons(self):
+        res = requests.get(top_cons_url, proxies=self.proxy, timeout=10)
+        if access_deny(res):
+            return False
+        pass
+
+    def post(self, post_name, content, node_name):
         pass
